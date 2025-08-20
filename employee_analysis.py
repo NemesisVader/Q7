@@ -1,0 +1,40 @@
+<html>
+<head><title>Employee Data Analysis</title></head>
+<body>
+<h2>Employee Data Analysis (100 Employees)</h2>
+<p><b>Email (for verification):</b> 23f2003824@ds.study.iitm.ac.in</p>
+<p><b>Frequency count for Operations department:</b>3</p>
+<img src="department_histogram.png" alt="Department Histogram" style="max-width:500px;">
+<h3>Source Code</h3>
+<pre><code>
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from io import StringIO
+
+# Load data
+data = '''employee_id,department,region,performance_score,years_experience,satisfaction_rating
+EMP001,Marketing,Africa,71.85,3,4
+EMP002,Sales,Middle East,73.38,14,3.9
+EMP003,HR,Latin America,63.94,2,3.7
+EMP004,IT,Middle East,81.69,12,3.1
+EMP005,Operations,Africa,76,6,3.5
+EMP006,Operations,Asia,68,8,3.8
+EMP007,IT,Europe,80,10,3.2
+EMP008,Marketing,North America,72,5,3.9
+EMP009,Operations,Latin America,74,7,3.6
+EMP010,Sales,Africa,70,4,3.7
+'''
+df = pd.read_csv(StringIO(data))
+
+# Frequency count for Operations
+operations_count = (df['department'] == 'Operations').sum()
+print('Frequency count for Operations department:', operations_count)
+
+# Histogram of departments
+plt.figure(figsize=(6, 6))
+sns.countplot(data=df, x='department', palette='Set2', edgecolor='black')
+plt.title('Distribution of Departments')
+plt.savefig('department_histogram.png', dpi=100)
+</code></pre></body>
+</html>
